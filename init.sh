@@ -20,4 +20,4 @@ ip=$(curl http://ipinfo.io/ip) &&
 curl http://http://118.31.108.209:8999/server/initSuccess?ip=$ip &&
 
 rm -rf /tmp/init.pid &&
-echo "init success" &&
+echo "init success" 
