@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ ! -f /tmp/init.pid ]; then
+    echo 'is running'
+    exit 1
+fi
 touch /tmp/init.pid &&
 yum install -y docker &&
 sleep 5 &&
