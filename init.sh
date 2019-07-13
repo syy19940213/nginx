@@ -12,6 +12,10 @@ mkdir -p /data/docker/nginx/conf/conf.d &&
 cd /data/docker/nginx/conf &&
 wget https://github.com/syy19940213/nginx/raw/master/nginx.conf &&
 
+cd /data/docker/nginx &&
+docker run -d -p 80:80 -p 443:443 -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/var/log/nginx -v $PWD/conf/conf.d:/etc/nginx/conf.d -v $PWD/ssl:/ssl   --name mynginx nginx:latest &&
+docker stop mynginx &&
+
 ip=$(curl http://ipinfo.io/ip) &&
 curl http://http://118.31.108.209:8999/server/initSuccess?ip=$ip &&
 
