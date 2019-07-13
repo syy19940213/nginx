@@ -6,9 +6,7 @@ if [ ! -f /tmp/init.pid ]; then
 fi
 touch /tmp/init.pid &&
 yum install -y docker &&
-sleep 5 &&
 service docker restart &&
-sleep 10 &&
 docker pull nginx &&
 mkdir -p /data/docker/nginx/logs &&
 mkdir -p /data/docker/nginx/ssl &&
