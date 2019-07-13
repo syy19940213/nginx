@@ -13,7 +13,7 @@ if [ "$DOMAIN" = '' ]; then
     echo 'pleas use --domain to set domain'
 fi
 
-
+yum install -y unzip zip &&
 mkdir -p /data/docker/nginx/ssl/ &&
 cd /data/docker/nginx/ssl/ &&
 wget https://github.com/certbot/certbot/archive/master.zip &&
