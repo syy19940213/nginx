@@ -1,4 +1,9 @@
 #!/bin/bash
+touch /tmp/ssl.pid
+if [ -f /tmp/ssl.pid ]; then
+    echo 'is running'
+    exit 1
+fi
 
 DOMAIN=''
 for args in $@
@@ -17,9 +22,14 @@ fi
 yum install -y unzip zip &&
 mkdir -p /data/docker/nginx/ssl/ &&
 cd /data/docker/nginx/ssl/ &&
-wget https://github.com/certbot/certbot/archive/master.zip &&
-unzip master.zip  &&
-cd certbot-master/ &&
+if [ ! -d /data/docker/nginx/ssl/certbot-master ]; then
+     wget https://github.com/certbot/certbot/archive/master.zip &&
+     unzip master.zip  &&
+     cd certbot-master/ &&
+else 
+     echo 'dir exists'
+fi
+
 ./certbot-auto certonly --standalone --email 137688788@qq.com  -d $DOMAIN --non-interactive --agree-tos &&
 
 mkdir -p /data/docker/nginx/ssl/$DOMAIN &&
@@ -35,11 +45,12 @@ chmod 777 fullchain.pem &&
 ip=$(curl http://ipinfo.io/ip) &&
 log=`tail -n 10 /var/log/letsencrypt/letsencrypt.log | grep 'Your certificate and chain have been saved'` &&
 if [ "$log" == "" ] ; then
-	curl http://168.63.143.99:8999/server/initSsl?ip=$ip&status=2
+	curl http://118.31.108.209:8999/server/initSsl?ip=$ip&status=2
 	echo "init error"
 else
-	curl http://168.63.143.99:8999/server/initSsl?ip=$ip&status=1
+	curl http://118.31.108.209:8999/server/initSsl?ip=$ip&status=1
 	echo "init success"
 fi
 
+rm -rf /tmp/ssl.pid
 
