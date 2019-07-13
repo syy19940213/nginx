@@ -1,9 +1,9 @@
 #!/bin/bash
-touch /tmp/ssl.pid
 if [ -f /tmp/ssl.pid ]; then
     echo 'is running'
     exit 1
 fi
+touch /tmp/ssl.pid
 
 DOMAIN=''
 for args in $@
