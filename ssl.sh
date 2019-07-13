@@ -11,6 +11,7 @@ done
 
 if [ "$DOMAIN" = '' ]; then
     echo 'pleas use --domain to set domain'
+    exit 1
 fi
 
 yum install -y unzip zip &&
