@@ -3,7 +3,7 @@
 touch /tmp/init.pid
 yum install -y docker
 sleep 30
-service docker start
+service docker restart
 sleep 30
 docker pull nginx
 mkdir -p /data/docker/nginx/logs
