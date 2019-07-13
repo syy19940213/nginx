@@ -24,12 +24,10 @@ mkdir -p /data/docker/nginx/ssl/ &&
 cd /data/docker/nginx/ssl/ &&
 if [ ! -d /data/docker/nginx/ssl/certbot-master ]; then
      wget https://github.com/certbot/certbot/archive/master.zip &&
-     unzip master.zip  &&
-     cd certbot-master/ &&
-else 
-     echo 'dir exists'
+     unzip master.zip  
 fi
 
+cd certbot-master/ &&
 ./certbot-auto certonly --standalone --email 137688788@qq.com  -d $DOMAIN --non-interactive --agree-tos &&
 
 mkdir -p /data/docker/nginx/ssl/$DOMAIN &&
