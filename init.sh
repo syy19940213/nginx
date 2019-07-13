@@ -2,9 +2,9 @@
 
 touch /tmp/init.pid
 yum install -y docker
-sleep 5
+sleep 30
 service docker start
-sleep 5
+sleep 30
 docker pull nginx
 mkdir -p /data/docker/nginx/logs
 mkdir -p /data/docker/nginx/ssl
