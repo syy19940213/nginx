@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f /tmp/init.pid ]; then
+if [ -f /tmp/init.pid ]; then
     echo 'is running'
     exit 1
 fi
