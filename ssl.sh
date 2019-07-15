@@ -16,6 +16,7 @@ done
 
 if [ "$DOMAIN" = '' ]; then
     echo 'pleas use --domain to set domain'
+    rm -rf /tmp/ssl.pid
     exit 1
 fi
 
