@@ -5,13 +5,12 @@ if [ -f /tmp/init.pid ]; then
     exit 1
 fi
 touch /tmp/init.pid &&
+yum install -y docker &&
 
 ip=$(curl http://ipinfo.io/ip) &&
 
 networkip=`echo ${ip%.*}.0` &&
 
-yum install -y docker &&
-sleep 120 &&
 service docker restart &&
 docker pull nginx &&
 docker network create --subnet=$networkip/16 mynetwork &&
