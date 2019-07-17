@@ -9,11 +9,11 @@ touch /tmp/init.pid &&
 ip=$(curl http://ipinfo.io/ip) &&
 
 networkip=`echo ${ip%.*}.0`
-docker network create --subnet=$networkip/16 mynetwork &&
 
 yum install -y docker &&
 service docker restart &&
 docker pull nginx &&
+docker network create --subnet=$networkip/16 mynetwork &&
 mkdir -p /data/docker/nginx/logs &&
 mkdir -p /data/docker/nginx/ssl &&
 mkdir -p /data/docker/nginx/conf/conf.d &&
