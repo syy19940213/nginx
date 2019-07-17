@@ -5,6 +5,12 @@ if [ -f /tmp/init.pid ]; then
     exit 1
 fi
 touch /tmp/init.pid &&
+
+ip=$(curl http://ipinfo.io/ip) &&
+
+networkip=`echo ${ip%.*}.0`
+docker network create --subnet=$networkip/16 mynetwork &&
+
 yum install -y docker &&
 service docker restart &&
 docker pull nginx &&
@@ -15,7 +21,7 @@ cd /data/docker/nginx/conf &&
 wget https://github.com/syy19940213/nginx/raw/master/nginx.conf &&
 
 cd /data/docker/nginx &&
-docker run -d -p 80:80 -p 443:443 -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/var/log/nginx -v $PWD/conf/conf.d:/etc/nginx/conf.d -v $PWD/ssl:/ssl   --name mynginx nginx:latest &&
+docker run -d -p 80:80 -p 443:443 -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/var/log/nginx -v $PWD/conf/conf.d:/etc/nginx/conf.d -v $PWD/ssl:/ssl   --name mynginx --net mynetwork --ip $ip nginx:latest &&
 docker stop mynginx &&
 
 ip=$(curl http://ipinfo.io/ip) &&
