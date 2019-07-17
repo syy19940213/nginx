@@ -11,8 +11,8 @@ ip=$(curl http://ipinfo.io/ip) &&
 networkip=`echo ${ip%.*}.0` &&
 
 yum install -y docker &&
+sleep 120 &&
 service docker restart &&
-sleep 5 &&
 docker pull nginx &&
 docker network create --subnet=$networkip/16 mynetwork &&
 
