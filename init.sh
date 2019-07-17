@@ -12,6 +12,7 @@ networkip=`echo ${ip%.*}.0` &&
 
 yum install -y docker &&
 service docker restart &&
+sleep 5 &&
 docker pull nginx &&
 docker network create --subnet=$networkip/16 mynetwork &&
 mkdir -p /data/docker/nginx/logs &&
