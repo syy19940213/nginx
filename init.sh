@@ -8,7 +8,7 @@ touch /tmp/init.pid &&
 
 ip=$(curl http://ipinfo.io/ip) &&
 
-networkip=`echo ${ip%.*}.0`
+networkip=`echo ${ip%.*}.0` &&
 
 yum install -y docker &&
 service docker restart &&
