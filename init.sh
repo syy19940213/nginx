@@ -16,6 +16,8 @@ echo $ddd
 sleep 5
 
 ddd=`service docker restart`
+
+sleep 10
 echo $ddd
 docker pull nginx 
 docker network create --subnet=$networkip/16 mynetwork 
