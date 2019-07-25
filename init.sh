@@ -15,7 +15,7 @@ echo $ddd
 
 sleep 5
 
-ddd=`service docker restart`
+nohup service docker restart >/dev/null 2>&1 &
 
 sleep 10
 echo $ddd
