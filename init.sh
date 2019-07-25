@@ -5,7 +5,8 @@ if [ -f /tmp/init.pid ]; then
     exit 1
 fi
 touch /tmp/init.pid &&
-yum install -y docker &&
+ddd=`yum install -y docker` 
+echo $ddd
 
 ip=$(curl http://ipinfo.io/ip) &&
 
