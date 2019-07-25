@@ -5,12 +5,15 @@ if [ -f /tmp/init.pid ]; then
     exit 1
 fi
 touch /tmp/init.pid &&
-ddd=`yum install -y docker` 
-echo $ddd
 
 ip=$(curl http://ipinfo.io/ip) &&
 
 networkip=`echo ${ip%.*}.0` &&
+
+ddd=`yum install -y docker` 
+echo $ddd
+
+sleep 5
 
 service docker restart &&
 docker pull nginx &&
