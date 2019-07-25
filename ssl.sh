@@ -25,7 +25,9 @@ echo $ddd
 mkdir -p /data/docker/nginx/ssl/ 
 cd /data/docker/nginx/ssl/ 
 if [ ! -d /data/docker/nginx/ssl/certbot-master ]; then
-     wget https://github.com/certbot/certbot/archive/master.zip 
+     echo 'exec wget'
+     wget https://github.com/certbot/certbot/archive/master.zip &&
+     echo 'exec unzip'
      unzip master.zip  
 fi
 
