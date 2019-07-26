@@ -20,7 +20,7 @@ nohup service docker restart >/dev/null 2>&1 &
 sleep 10
 echo $ddd
 docker pull nginx 
-docker network create --subnet=$networkip/16 mynetwork 
+docker network create --subnet=$networkip/24 mynetwork 
 
 mkdir -p /data/docker/nginx/logs 
 mkdir -p /data/docker/nginx/ssl 
