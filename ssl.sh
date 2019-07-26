@@ -23,6 +23,7 @@ fi
 ddd=`yum install -y unzip zip`
 echo $ddd
 mkdir -p /data/docker/nginx/ssl/ 
+mkdir -p /data/docker/nginx/www
 cd /data/docker/nginx/ssl/ 
 if [ ! -d /data/docker/nginx/ssl/certbot-master ]; then
      echo 'exec wget'
@@ -33,7 +34,7 @@ if [ ! -d /data/docker/nginx/ssl/certbot-master ]; then
 fi
 
 cd certbot-master/ 
-./certbot-auto certonly --standalone --email 137688788@qq.com  -d $DOMAIN --non-interactive --agree-tos 
+./certbot-auto certonly --text  --webroot -w /data/docker/nginx/www  --email 137688788@qq.com  -d $DOMAIN --non-interactive --agree-tos
 
 mkdir -p /data/docker/nginx/ssl/$DOMAIN 
 cp /etc/letsencrypt/archive/$DOMAIN/fullchain1.pem /data/docker/nginx/ssl/$DOMAIN 
