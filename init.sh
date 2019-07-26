@@ -26,7 +26,8 @@ mkdir -p /data/docker/nginx/logs
 mkdir -p /data/docker/nginx/ssl 
 mkdir -p /data/docker/nginx/conf/conf.d 
 cd /data/docker/nginx/conf 
-curl -O "https://github.com/syy19940213/nginx/raw/master/nginx.conf"
+curl -O "https://raw.githubusercontent.com/syy19940213/nginx/master/nginx.conf"
+
 
 cd /data/docker/nginx 
 docker run -d -p 80:80 -p 443:443 -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/var/log/nginx -v $PWD/conf/conf.d:/etc/nginx/conf.d -v $PWD/ssl:/ssl  -v /etc/localtime:/etc/localtime -v /etc/timezone:/etc/timezone:ro  -v $PWD/www:/www  --net mynetwork --ip $ip   --name mynginx  nginx:latest 
