@@ -6,15 +6,20 @@ fi
 touch /tmp/ssl.pid
 
 DOMAIN=''
+domains=''
+i=0
 for args in $@
 do
    case $args in
-	--domain=*)
-          DOMAIN=`echo $args | awk -F "=" '{print $NF}'`
+        --domain=*)
+          DOMAIN=${args#*=}
+          domains=$domains' -d '$DOMAIN
+        ;;
    esac
 done
+echo $domains
 
-if [ "$DOMAIN" = '' ]; then
+if [ "$domains" = '' ]; then
     echo 'pleas use --domain to set domain'
     rm -rf /tmp/ssl.pid
     exit 1
@@ -34,7 +39,7 @@ if [ ! -d /data/docker/nginx/ssl/certbot-master ]; then
 fi
 
 cd certbot-master/ 
-./certbot-auto certonly --text  --webroot -w /data/docker/nginx/www  --email 137688788@qq.com  -d $DOMAIN --non-interactive --agree-tos
+./certbot-auto certonly --text  --webroot -w /data/docker/nginx/www  --email 137688788@qq.com  $domains --non-interactive --agree-tos
 
 mkdir -p /data/docker/nginx/ssl/$DOMAIN 
 cp /etc/letsencrypt/archive/$DOMAIN/fullchain1.pem /data/docker/nginx/ssl/$DOMAIN 
