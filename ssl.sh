@@ -32,7 +32,7 @@ if [ "$domains" = '' ]; then
     exit 1
 fi
 
-if [ "$dirname" = '' ]; then
+if [ "$DIRNAME" = '' ]; then
     echo 'pleas use --dirname to set dirname'
     rm -rf /tmp/ssl.pid
     exit 1
