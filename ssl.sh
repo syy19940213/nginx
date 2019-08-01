@@ -7,11 +7,15 @@ touch /tmp/ssl.pid
 DIRNAME=''
 DOMAIN=''
 domains=''
+firstdomain=''
 i=0
 for args in $@
 do
    case $args in
         --domain=*)
+	  if [ "$firstdomain" = '' ]; then
+	  	firstdomain=${args#*=}
+	  fi
           DOMAIN=${args#*=}
           domains=$domains' -d '$DOMAIN
         ;;
@@ -52,8 +56,8 @@ cd certbot-master/
 ./certbot-auto certonly --text  --webroot -w /data/docker/nginx/www  --email 137688788@qq.com  $domains --non-interactive --agree-tos
 
 mkdir -p /data/docker/nginx/ssl/$DIRNAME 
-cp /etc/letsencrypt/archive/$DOMAIN/fullchain1.pem /data/docker/nginx/ssl/$DIRNAME 
-cp /etc/letsencrypt/archive/$DOMAIN/privkey1.pem /data/docker/nginx/ssl/$DIRNAME 
+cp /etc/letsencrypt/archive/$firstdomain/fullchain1.pem /data/docker/nginx/ssl/$DIRNAME 
+cp /etc/letsencrypt/archive/$firstdomain/privkey1.pem /data/docker/nginx/ssl/$DIRNAME 
 cd /data/docker/nginx/ssl/$DIRNAME 
 mv privkey1.pem privkey.pem 
 mv fullchain1.pem fullchain.pem 
