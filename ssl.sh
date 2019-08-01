@@ -4,7 +4,7 @@ if [ -f /tmp/ssl.pid ]; then
     exit 1
 fi
 touch /tmp/ssl.pid
-
+DIRNAME=''
 DOMAIN=''
 domains=''
 i=0
@@ -15,6 +15,9 @@ do
           DOMAIN=${args#*=}
           domains=$domains' -d '$DOMAIN
         ;;
+	--dirname=*)
+	  DIRNAME=${args#*=}
+	;;
    esac
 done
 echo $domains
@@ -24,6 +27,13 @@ if [ "$domains" = '' ]; then
     rm -rf /tmp/ssl.pid
     exit 1
 fi
+
+if [ "$dirname" = '' ]; then
+    echo 'pleas use --dirname to set dirname'
+    rm -rf /tmp/ssl.pid
+    exit 1
+fi
+
 
 ddd=`yum install -y unzip zip`
 echo $ddd
@@ -41,10 +51,10 @@ fi
 cd certbot-master/ 
 ./certbot-auto certonly --text  --webroot -w /data/docker/nginx/www  --email 137688788@qq.com  $domains --non-interactive --agree-tos
 
-mkdir -p /data/docker/nginx/ssl/$DOMAIN 
-cp /etc/letsencrypt/archive/$DOMAIN/fullchain1.pem /data/docker/nginx/ssl/$DOMAIN 
-cp /etc/letsencrypt/archive/$DOMAIN/privkey1.pem /data/docker/nginx/ssl/$DOMAIN 
-cd /data/docker/nginx/ssl/$DOMAIN 
+mkdir -p /data/docker/nginx/ssl/$DIRNAME 
+cp /etc/letsencrypt/archive/$DOMAIN/fullchain1.pem /data/docker/nginx/ssl/$DIRNAME 
+cp /etc/letsencrypt/archive/$DOMAIN/privkey1.pem /data/docker/nginx/ssl/$DIRNAME 
+cd /data/docker/nginx/ssl/$DIRNAME 
 mv privkey1.pem privkey.pem 
 mv fullchain1.pem fullchain.pem 
 chmod 777 privkey.pem 
