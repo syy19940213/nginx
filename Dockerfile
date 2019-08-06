@@ -2,6 +2,11 @@ FROM centos
 
 RUN ping -c 1 www.baidu.com
 RUN yum -y install openssl openssl-devel  wget gcc make pcre-devel zlib-devel tar zlib
+
+RUN mkdir /nginx
+WORKDIR /nginx
+RUN wget https://raw.githubusercontent.com/syy19940213/nginx/master/GeoLite2-Country.mmdb
+
 RUN mkdir /data
 WORKDIR /data
 RUN wget https://github.com/maxmind/libmaxminddb/releases/download/1.3.2/libmaxminddb-1.3.2.tar.gz
@@ -15,6 +20,7 @@ RUN  mkdir -p /var/cache/nginx/
 WORKDIR /data
 RUN wget https://github.com/TravelEngineers/ngx_http_geoip2_module/archive/3.2.tar.gz
 RUN  tar -zxvf 3.2.tar.gz
+
 
 
 RUN wget http://nginx.org/download/nginx-1.17.2.tar.gz
