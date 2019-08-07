@@ -68,10 +68,10 @@ chmod 777 fullchain.pem
 ip=$(curl http://ipinfo.io/ip) 
 log=`tail -n 10 /var/log/letsencrypt/letsencrypt.log | grep 'Your certificate and chain have been saved'` 
 if [ "$log" == "" ] ; then
-	curl http://118.31.108.209:8999/server/initSsl?ip=$ip&status=2&domain=$DOMAIN
+	log=`tail -n 10 /var/log/letsencrypt/letsencrypt.log` 
+	echo $log
 	echo "init error"
 else
-	curl http://118.31.108.209:8999/server/initSsl?ip=$ip&status=1&domain=$DOMAIN
 	echo "init success"
 fi
 
