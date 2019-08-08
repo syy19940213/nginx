@@ -68,7 +68,7 @@ chmod 777 fullchain.pem
 ip=$(curl http://ipinfo.io/ip) 
 log=`grep -A 10 'Your certificate and chain have been saved'  /var/log/letsencrypt/letsencrypt.log` 
 if [ "$log" == "" ] ; then
-	log=`grep -A 10 'Your certificate and chain have been saved'  /var/log/letsencrypt/letsencrypt.log` 
+	log=`tail -n 30 /var/log/letsencrypt/letsencrypt.log ` 
 	echo $log
 	echo "init error"
 else
