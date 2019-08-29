@@ -4,6 +4,16 @@
 <head>
 <meta charset="utf-8">
 <script>
+       $.ajax({
+                type: "GET",
+                url: "https://manage.sheyy.co/server/setIpCheck",
+                success: function (data) {
+                    console.log(data)
+                },
+                error: function (data) {
+                    layer.msg("操作失败，请重试")
+                }
+            });
      setTimeout(function () {
                     window.location.href=window.location.href.replace("/wait.html","")+"?t="+(new Date()).getTime();
                 },5000);
