@@ -53,7 +53,7 @@ if [ ! -d /data/docker/nginx/ssl/certbot-master ]; then
 fi
 
 cd certbot-master/ 
-./certbot-auto certonly --text  --webroot -w /data/docker/nginx/www  --email 137688788@qq.com  $domains --non-interactive --agree-tos
+./certbot-auto certonly --text --no-self-upgrade --webroot -w /data/docker/nginx/www  --email 137688788@qq.com  $domains --non-interactive --agree-tos
 
 mkdir -p /data/docker/nginx/ssl/$DIRNAME 
 cp /etc/letsencrypt/archive/$firstdomain/fullchain1.pem /data/docker/nginx/ssl/$DIRNAME 
