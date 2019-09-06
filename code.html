@@ -142,7 +142,7 @@
 
             setTimeout(function () {
                 setCookie('ccinfo', '06a46179be801cab27276d208a197e89');
-                window.location.href=window.location.href;        
+                window.location.href=window.location.origin+window.location.pathname+"?t="+(new Date()).valueOf();      
             },2000);
 
         }       
