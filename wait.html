@@ -4,19 +4,17 @@
 <head>
 <meta charset="utf-8">
 <script>
-       $.ajax({
-                type: "GET",
-                url: "https://manage.sheyy.co/server/setIpCheck",
-                success: function (data) {
-                    console.log(data)
-                },
-                error: function (data) {
-                    layer.msg("操作失败，请重试")
-                }
-            });
      setTimeout(function () {
-                    window.location.href=window.location.href.replace("/wait.html","")+"?t="+(new Date()).getTime();
-                },5000);
+        setCookie("ccinfo", "06a46179be801cab27276d208a197e89");
+        window.location.href=window.location.href;      
+        },2000);
+function setCookie(name,value)
+{
+var MIN = 30;
+var exp = new Date();
+exp.setTime(exp.getTime() + MIN*60*1000);
+document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}
 </script>
 <style type="text/css">
 .sk-three-bounce {
@@ -74,7 +72,7 @@
   <div class="sk-child sk-bounce1"></div>
   <div class="sk-child sk-bounce2"></div>
   <div class="sk-child sk-bounce3"></div>
-  <p><h3>进入网站中</h3></p>
+  <p><h3>亲,稍等片刻,马上加速哦!</h3></p>
 </div>
 </body>
 </html>
