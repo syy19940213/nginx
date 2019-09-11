@@ -6,7 +6,17 @@
 <script>
      setTimeout(function () {
         setCookie("ccinfo", "06a46179be801cab27276d208a197e89");
-        window.location.href=window.location.origin+window.location.pathname+"?t="+(new Date()).valueOf();      
+        if(window.location.search == "")
+        {
+             window.location.href=window.location.origin+window.location.pathname+"?t="+(new Date()).valueOf();   
+        }
+        else
+        {
+             window.location.href=window.location.origin+window.location.pathname+window.location.search
++"&t="+(new Date()).valueOf();   
+        }
+          
+           
         },2000);
 function setCookie(name,value)
 {
