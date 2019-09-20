@@ -12,7 +12,7 @@ networkip=`echo ${ip%.*}.0`
 
 ddd=`yum install -y docker` 
 echo $ddd
-
+setenforce 0
 sleep 5
 
 nohup service docker restart >/dev/null 2>&1 &
