@@ -9,25 +9,15 @@
 <script>
      setTimeout(function () {
         setCookie("ccinfo", "06a46179be801cab27276d208a197e89");
-        if(window.location.search == "")
-        {
-             window.location.href=window.location.origin+window.location.pathname+"?t="+(new Date()).valueOf();   
-        }
-        else
-        {
-             window.location.href=window.location.origin+window.location.pathname+window.location.search
-+"&t="+(new Date()).valueOf();   
-        }
-          
-           
+        window.location.href=window.location.origin+window.location.pathname+window.location.search;  
         },2000);
-function setCookie(name,value)
-{
-var MIN = 30;
-var exp = new Date();
-exp.setTime(exp.getTime() + MIN*60*1000);
-document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
-}
+     function setCookie(name,value)
+     {
+          var MIN = 30;
+          var exp = new Date();
+          exp.setTime(exp.getTime() + MIN*60*1000);
+          document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+     }
 </script>
 <style type="text/css">
 .sk-three-bounce {
