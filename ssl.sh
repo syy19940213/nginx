@@ -6,6 +6,7 @@ fi
 touch /tmp/ssl.pid
 DIRNAME=''
 DOMAIN=''
+ASSIGNIP=''
 domains=''
 firstdomain=''
 i=0
@@ -21,6 +22,9 @@ do
         ;;
 	--dirname=*)
 	  DIRNAME=${args#*=}
+	;;
+	--assignip=*)
+	  ASSIGNIP=${args#*=}
 	;;
    esac
 done
@@ -52,9 +56,17 @@ if [ ! -d /data/docker/nginx/ssl/certbot-master ]; then
      unzip master.zip  
 fi
 
+if [ "$ASSIGNIP" = '' ]; then
+ cd certbot-master/ 
+	./certbot-auto certonly --text --no-self-upgrade --webroot -w /data/docker/nginx/www  --email 137688788@qq.com  $domains --non-interactive --agree-tos
+ 	
+    
+else
 cd certbot-master/ 
-./certbot-auto certonly --text --no-self-upgrade --webroot -w /data/docker/nginx/www  --email 137688788@qq.com  $domains --non-interactive --agree-tos
+./certbot-auto certonly --text --no-self-upgrade --webroot -w /data/docker/nginx/www  --email 137688788@qq.com  $domains --non-interactive --agree-tos  --http-01-address $ASSIGNIP   
+fi
 
+ 
 mkdir -p /data/docker/nginx/ssl/$DIRNAME 
 cp /etc/letsencrypt/archive/$firstdomain/fullchain1.pem /data/docker/nginx/ssl/$DIRNAME 
 cp /etc/letsencrypt/archive/$firstdomain/privkey1.pem /data/docker/nginx/ssl/$DIRNAME 
@@ -76,4 +88,3 @@ else
 fi
 
 rm -rf /tmp/ssl.pid
-
