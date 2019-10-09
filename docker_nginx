@@ -1,0 +1,12 @@
+/data/docker/nginx/logs/*log {
+    daily
+    rotate 10
+    dateext
+    missingok
+    notifempty
+    compress
+    sharedscripts
+    postrotate
+         docker exec mynginx bash -c "if [ -f /run/nginx.pid ]; then kill -USR1 `docker exec mynginx cat /run/nginx.pid`; echo 日志打包完毕; fi"
+    endscript
+}
