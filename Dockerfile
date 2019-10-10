@@ -1,4 +1,4 @@
-FROM centos
+FROM centos:7.6.1810
 
 RUN ping -c 1 www.baidu.com
 RUN yum -y install openssl openssl-devel  wget gcc make pcre-devel zlib-devel tar zlib
