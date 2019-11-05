@@ -33,8 +33,5 @@ mkdir -p /data/docker/nginx/cache
 docker run -d -p 80:80 -p 443:443 -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf  -v $PWD/logs:/var/log/nginx -v $PWD/conf/conf.d:/etc/nginx/conf.d -v $PWD/ssl:/ssl  -v /etc/localtime:/etc/localtime -v /etc/timezone:/etc/timezone:ro  -v $PWD/www:/www -v $PWD/cache:/cache   --net mynetwork --ip $ip   --name mynginx  nginx:v1 
 docker stop mynginx 
 
-ip=$(curl http://ipinfo.io/ip) 
-curl http://http://118.31.108.209:8999/server/initSuccess?ip=$ip 
-
 rm -rf /tmp/init.pid 
 echo "init success"
